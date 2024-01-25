@@ -6,9 +6,29 @@ import { MakerRpm } from '@electron-forge/maker-rpm';
 import { VitePlugin } from '@electron-forge/plugin-vite';
 
 const config: ForgeConfig = {
-    packagerConfig: {},
+    packagerConfig: {
+        // macOS对代码进行签名
+        // osxSign: {},
+        // // ...
+        // osxNotarize: {
+        //     // tool: 'notarytool',
+        //     appleId: process.env.APPLE_ID as string,
+        //     appleIdPassword: process.env.APPLE_PASSWORD as string,
+        //     teamId: process.env.APPLE_TEAM_ID as string,
+        // },
+        // // ...
+    },
     rebuildConfig: {},
-    makers: [new MakerSquirrel({}), new MakerZIP({}, ['darwin']), new MakerRpm({}), new MakerDeb({})],
+    makers: [
+        new MakerSquirrel({
+            // Windows对代码进行签名
+            // certificateFile: './cert.pfx',
+            // certificatePassword: process.env.CERTIFICATE_PASSWORD,
+        }),
+        new MakerZIP({}, ['darwin']),
+        new MakerRpm({}),
+        new MakerDeb({}),
+    ],
     plugins: [
         new VitePlugin({
             // `build` can specify multiple entry builds, which can be Main process, Preload scripts, Worker process, etc.
