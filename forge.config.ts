@@ -7,6 +7,7 @@ import { VitePlugin } from '@electron-forge/plugin-vite';
 
 const config: ForgeConfig = {
     packagerConfig: {
+        asar: true, // 将源码打成asar包
         // macOS对代码进行签名
         // osxSign: {},
         // // ...
@@ -25,7 +26,7 @@ const config: ForgeConfig = {
             // certificateFile: './cert.pfx',
             // certificatePassword: process.env.CERTIFICATE_PASSWORD,
         }),
-        new MakerZIP({}, ['darwin']),
+        new MakerZIP({}, ['darwin', 'win32']),
         new MakerRpm({}),
         new MakerDeb({}),
     ],
@@ -51,6 +52,11 @@ const config: ForgeConfig = {
                 },
             ],
         }),
+        {
+            // 将源码打成asar包的插件
+            name: '@electron-forge/plugin-auto-unpack-natives',
+            config: {},
+        },
     ],
 };
 
