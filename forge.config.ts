@@ -5,9 +5,28 @@ import { MakerDeb } from '@electron-forge/maker-deb';
 import { MakerRpm } from '@electron-forge/maker-rpm';
 import { VitePlugin } from '@electron-forge/plugin-vite';
 
+// function ignoreFunction(path: string) {
+//     console.log(path);
+//     return false;
+// }
+
 const config: ForgeConfig = {
     packagerConfig: {
-        asar: true, // 将源码打成asar包
+        // 将源码打成asar包(依赖了@electron-forge/plugin-auto-unpack-natives插件)
+        // asar: true,
+        // ignore: [/^(?!node_module)s$/],
+        // ignore: [/^\/(?!.*node_modules)$/g],
+        ignore: (path) => {
+            console.log('ignore path', path);
+            if (!path) return false;
+            return (
+                !/^[/\\]package\.json$/.test(path) &&
+                // !/^[/\\]node_modules/.test(path) &&
+                // !/^[/\\]node_modules($|[/\\]).*$/.test(path) &&
+                !/^[/\\]\.vite($|[/\\]).*$/.test(path)
+            );
+        },
+        // ignore: ['^/\\.vite$\\/'],
         // macOS对代码进行签名
         // osxSign: {},
         // // ...
@@ -52,11 +71,11 @@ const config: ForgeConfig = {
                 },
             ],
         }),
-        {
-            // 将源码打成asar包的插件
-            name: '@electron-forge/plugin-auto-unpack-natives',
-            config: {},
-        },
+        // {
+        //     // 将源码打成asar包的插件
+        //     name: '@electron-forge/plugin-auto-unpack-natives',
+        //     config: {},
+        // },
     ],
 };
 
