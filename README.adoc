@@ -5,6 +5,16 @@
 yarn
 ----
 
+== 设置环境变量
+* CERTIFICATE_PASSWORD
+** 访问数字证书(.key目录下后缀为.pfx的文件)的密码
+** 用于windows下对程序进行签名
+* GITHUB_TOKEN
+** 用于发布时访问github的token
+** https://github.com/settings/tokens/new[在github中创建token]
+* ELECTRON_RELEASE_SERVER_PASSWORD
+** 用于发布到 Electron Release Server 的密码
+
 == 常用脚本命令
 === 运行调试
 * 网页开发调试

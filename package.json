@@ -11,7 +11,7 @@
         "build": "vue-tsc --noEmit && vite build -c vite.renderer.config.ts",
         "start": "electron-forge start",
         "premake": "npm run clean",
-        "make": "cross-env CERTIFICATE_PASSWORD=12345678 electron-forge make --platform win32",
+        "make": "electron-forge make --platform win32",
         "prepublish": "npm run clean",
         "publish": "electron-forge publish --platform win32"
     },

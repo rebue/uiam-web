@@ -82,10 +82,9 @@ const config: ForgeConfig = {
                     owner: 'rebue',
                     name: 'uiam-web',
                 },
-                authToken: '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',
-                prerelease: false,
-                draft: false,
-                force: true,
+                // prerelease: true,
+                // draft: false,
+                // force: true,
             },
         },
         // {
