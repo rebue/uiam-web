@@ -2,37 +2,57 @@
     "name": "uiam-web",
     "productName": "uiam-web",
     "version": "1.0.0",
-    "description": "My Electron application description",
+    "description": "统一身份认证和访问管理平台的前端",
     "main": ".vite/build/main.js",
     "scripts": {
-        "dev": "rimraf dist && vite -c vite.renderer.config.ts",
-        "build": "rimraf dist && vue-tsc --noEmit && vite build -c vite.renderer.config.ts",
+        "clean": "rimraf dist & rimraf out",
+        "dev": "vite -c vite.renderer.config.ts",
+        "prebuild": "npm run clean",
+        "build": "vue-tsc --noEmit && vite build -c vite.renderer.config.ts",
         "start": "electron-forge start",
-        "package": "rimraf out && electron-forge package --platform win32 && cpy 'node_modules' out/uiam-web-win32-x64/resources/app && asar pack out/uiam-web-win32-x64/resources/app out/uiam-web-win32-x64/resources/app.asar && del out/uiam-web-win32-x64/resources/app",
-        "make": "rimraf out && electron-forge make --platform win32 && cpy 'node_modules' out/uiam-web-win32-x64/resources/app && asar pack out/uiam-web-win32-x64/resources/app out/uiam-web-win32-x64/resources/app.asar && del out/uiam-web-win32-x64/resources/app",
-        "publish": "electron-forge publish",
-        "lint": "eslint --ext .ts,.tsx ."
+        "premake": "npm run clean",
+        "make": "cross-env CERTIFICATE_PASSWORD=12345678 electron-forge make --platform win32",
+        "prepublish": "npm run clean",
+        "publish": "cross-env GITHUB_TOKEN=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 ELECTRON_RELEASE_SERVER_PASSWORD=password electron-forge publish --platform win32"
     },
-    "keywords": [],
+    "keywords": [
+        "electron",
+        "vite",
+        "vue",
+        "IAM"
+    ],
     "author": {
-        "name": "zbz",
-        "email": "nnzbz@21cn.com"
+        "name": "nnzbz",
+        "email": "nnzbz@qq.com"
     },
     "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/rebue/uiam-web.git"
+    },
+    "homepage": "https://github.com/rebue/uiam-web.git",
+    "bugs": {
+        "url": "https://github.com/rebue/uiam-web/issues"
+    },
     "devDependencies": {
         "@electron-forge/cli": "^7.2.0",
         "@electron-forge/maker-deb": "^7.2.0",
+        "@electron-forge/maker-dmg": "^7.2.0",
         "@electron-forge/maker-rpm": "^7.2.0",
         "@electron-forge/maker-squirrel": "^7.2.0",
         "@electron-forge/maker-zip": "^7.2.0",
         "@electron-forge/plugin-auto-unpack-natives": "^7.2.0",
         "@electron-forge/plugin-vite": "^7.2.0",
+        "@electron-forge/publisher-electron-release-server": "^7.2.0",
+        "@electron-forge/publisher-github": "^7.2.0",
         "@typescript-eslint/eslint-plugin": "^5.0.0",
         "@typescript-eslint/parser": "^5.0.0",
         "@vitejs/plugin-vue": "^5.0.3",
         "cpy-cli": "^5.0.0",
+        "cross-env": "^7.0.3",
         "del-cli": "^5.1.0",
         "electron": "^28.1.4",
+        "electron-log": "^5.1.0",
         "eslint": "^8.0.1",
         "eslint-plugin-import": "^2.25.0",
         "path": "^0.12.7",
@@ -43,6 +63,7 @@
     },
     "dependencies": {
         "electron-squirrel-startup": "^1.0.0",
+        "update-electron-app": "^3.0.0",
         "vue": "^3.4.15"
     }
 }

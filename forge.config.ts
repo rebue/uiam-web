@@ -13,20 +13,32 @@ import { VitePlugin } from '@electron-forge/plugin-vite';
 const config: ForgeConfig = {
     packagerConfig: {
         // 将源码打成asar包(依赖了@electron-forge/plugin-auto-unpack-natives插件)
-        // asar: true,
-        // ignore: [/^(?!node_module)s$/],
-        // ignore: [/^\/(?!.*node_modules)$/g],
-        ignore: (path) => {
-            console.log('ignore path', path);
-            if (!path) return false;
-            return (
-                !/^[/\\]package\.json$/.test(path) &&
-                // !/^[/\\]node_modules/.test(path) &&
-                // !/^[/\\]node_modules($|[/\\]).*$/.test(path) &&
-                !/^[/\\]\.vite($|[/\\]).*$/.test(path)
-            );
-        },
-        // ignore: ['^/\\.vite$\\/'],
+        asar: true, // 目前Electron-Forge的7.2.0版本有bug，不能打包比较大的包(https://github.com/electron/forge/pull/3336)
+        ignore: [
+            /^[/\\]\.key$/,
+            /^[/\\]out$/,
+            /^[/\\]src$/,
+            /^[/\\]\.env\.development$/,
+            /^[/\\]\.env\.production$/,
+            /^[/\\]\.eslintrc\.json$/,
+            /^[/\\]\.gitignore$/,
+            /^[/\\]\.npmrc$/,
+            /^[/\\]\.prettierrc\.yml$/,
+            /^[/\\]forge\.config\.ts$/,
+            /^[/\\]README\.adoc$/,
+            /^[/\\]tsconfig\.json$/,
+            /^[/\\]vite\.main\.config\.ts$/,
+            /^[/\\]vite\.preload\.config\.ts$/,
+            /^[/\\]vite\.renderer\.config\.ts$/,
+            /^[/\\]yarn-error\.log$/,
+            /^[/\\]yarn\.lock$/,
+        ],
+        // // 使用函数这种灵活的方式来忽略(目前Electron-Forge的7.2.0版本有bug，打包node_modules下的某些模块会报错https://github.com/electron/forge/pull/3336)
+        // ignore: (path) => {
+        //     console.log('ignore path', path);
+        //     if (!path) return false;
+        //     return !/^[/\\]package\.json$/.test(path) && !/^[/\\]\.vite($|[/\\]).*$/.test(path);
+        // },
         // macOS对代码进行签名
         // osxSign: {},
         // // ...
@@ -40,14 +52,49 @@ const config: ForgeConfig = {
     },
     rebuildConfig: {},
     makers: [
-        new MakerSquirrel({
+        {
             // Windows对代码进行签名
-            // certificateFile: './cert.pfx',
-            // certificatePassword: process.env.CERTIFICATE_PASSWORD,
-        }),
-        new MakerZIP({}, ['darwin', 'win32']),
-        new MakerRpm({}),
-        new MakerDeb({}),
+            name: '@electron-forge/maker-squirrel',
+            config: {
+                certificateFile: './.key/uiam-web.pfx',
+                certificatePassword: process.env.CERTIFICATE_PASSWORD,
+            },
+        },
+        {
+            name: '@electron-forge/maker-zip',
+            config: {
+                // Config here
+            },
+        },
+        {
+            name: '@electron-forge/maker-dmg',
+            config: {
+                // background: './assets/dmg-background.png',
+                // format: 'ULFO',
+            },
+        },
+    ],
+    publishers: [
+        {
+            name: '@electron-forge/publisher-github',
+            config: {
+                repository: {
+                    owner: 'rebue',
+                    name: 'uiam-web',
+                },
+                prerelease: false,
+                draft: false,
+                force: true,
+            },
+        },
+        // {
+        //     name: '@electron-forge/publisher-electron-release-server',
+        //     config: {
+        //         baseUrl: 'http://fq:18081',
+        //         username: 'username',
+        //         password: process.env.ELECTRON_RELEASE_SERVER_PASSWORD,
+        //     },
+        // },
     ],
     plugins: [
         new VitePlugin({

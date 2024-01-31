@@ -1,0 +1,54 @@
+= 统一身份认证与访问管理平台的前端
+
+== 初始化
+----
+yarn
+----
+
+== 常用脚本命令
+=== 运行调试
+* 网页开发调试
++
+----
+yarn run dev
+----
+* 运行程序调试
++
+----
+yarn run start
+----
+
+=== 编译
+* 清除编译的临时文件
++
+----
+yarn run clean
+----
+* 网页编译
++
+----
+yarn run build
+----
+* 程序打包编译
++
+----
+yarn run make
+----
+====
+如何指定编译的平台？
+
+- 请注意 *package.json* 的脚本中的 *--platform win32* 的部分：win32的值可以换成 *darwin* *linux* 等值；如果没有设置，默认编译的平台就是当前操作系统的平台
+- 如果不是 *win32* 平台，可以把 *--platform xxxxx* 参数后面的所有字符串都删除
+====
+
+=== 发布
+发布到github的release
+----
+yarn run publish
+----
+====
+如何指定发布的平台？
+
+- 请注意 *package.json* 的脚本中的 *--platform win32* 的部分：win32的值可以换成 *darwin* *linux* 等值；如果没有设置，默认编译的平台就是当前操作系统的平台
+- 如果不是 *win32* 平台，可以把 *--platform xxxxx* 参数后面的所有字符串都删除
+====

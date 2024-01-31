@@ -1,5 +1,18 @@
 import { app, BrowserWindow } from 'electron';
 import path from 'path';
+import { updateElectronApp } from 'update-electron-app';
+import Logger from 'electron-log';
+
+// github自动更新程序
+updateElectronApp({
+    // updateSource: {
+    //     type: UpdateSourceType.ElectronPublicUpdateService,
+    //     repo: 'rebue/uiam-web',
+    // },
+    updateInterval: '5 minutes',
+    logger: Logger,
+});
+// require('update-electron-app')();
 
 const isDev = !app.isPackaged;
 console.log('isDev', isDev);
