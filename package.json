@@ -13,7 +13,7 @@
         "premake": "npm run clean",
         "make": "cross-env CERTIFICATE_PASSWORD=12345678 electron-forge make --platform win32",
         "prepublish": "npm run clean",
-        "publish": "cross-env GITHUB_TOKEN=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 ELECTRON_RELEASE_SERVER_PASSWORD=password electron-forge publish --platform win32"
+        "publish": "cross-env GITHUB_TOKEN=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 electron-forge publish --platform win32"
     },
     "keywords": [
         "electron",
