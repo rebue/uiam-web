@@ -75,26 +75,26 @@ const config: ForgeConfig = {
         },
     ],
     publishers: [
-        {
-            name: '@electron-forge/publisher-github',
-            config: {
-                repository: {
-                    owner: 'rebue',
-                    name: 'uiam-web',
-                },
-                // prelease: true,
-                draft: false,
-                // force: true,
-            },
-        },
         // {
-        //     name: '@electron-forge/publisher-electron-release-server',
+        //     name: '@electron-forge/publisher-github',
         //     config: {
-        //         baseUrl: 'http://fq:18081',
-        //         username: 'username',
-        //         password: process.env.ELECTRON_RELEASE_SERVER_PASSWORD,
+        //         repository: {
+        //             owner: 'rebue',
+        //             name: 'uiam-web',
+        //         },
+        //         // prelease: true,
+        //         draft: false,
+        //         // force: true,
         //     },
         // },
+        {
+            name: '@electron-forge/publisher-electron-release-server',
+            config: {
+                baseUrl: process.env.AUTO_UPDATE_SERVER,
+                username: process.env.ELECTRON_RELEASE_SERVER_USERNAME,
+                password: process.env.ELECTRON_RELEASE_SERVER_PASSWORD,
+            },
+        },
     ],
     plugins: [
         new VitePlugin({

@@ -12,6 +12,10 @@ yarn
 * GITHUB_TOKEN
 ** 用于发布时访问github的token
 ** https://github.com/settings/tokens/new[在github中创建token]
+* AUTO_UPDATE_SERVER
+** 自动更新服务器的地址
+* ELECTRON_RELEASE_SERVER_USERNAME
+** 用于发布到 Electron Release Server 的用户名
 * ELECTRON_RELEASE_SERVER_PASSWORD
 ** 用于发布到 Electron Release Server 的密码
 
