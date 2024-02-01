@@ -82,6 +82,7 @@ const config: ForgeConfig = {
                     owner: 'rebue',
                     name: 'uiam-web',
                 },
+                // prelease: true,
                 draft: false,
                 // force: true,
             },
