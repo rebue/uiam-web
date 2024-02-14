@@ -7,6 +7,7 @@ import Icons from 'unplugin-icons/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import AutoRegistry from 'unplugin-vue-components/vite';
 import { defineConfig, loadEnv } from 'vite';
+import { createHtmlPlugin } from 'vite-plugin-html';
 import { viteMockServe } from 'vite-plugin-mock';
 
 // https://vitejs.dev/config/
@@ -147,6 +148,16 @@ export default defineConfig(({ command, mode }) => {
                 ],
                 // 在root目录下自动生成components.d.ts文件
                 dts: true,
+            }),
+            // HTML插件
+            // https://github.com/vbenjs/vite-plugin-html
+            createHtmlPlugin({
+                // 注入
+                inject: {
+                    data: {
+                        title: env.VITE_TITLE, // 注入标题
+                    },
+                },
             }),
         ],
     };
