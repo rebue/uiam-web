@@ -1,6 +1,5 @@
 import { app, BrowserWindow, autoUpdater, dialog, MessageBoxOptions } from 'electron';
 import path from 'path';
-import { default as electronSquirrelStartup } from 'electron-squirrel-startup';
 // import { updateElectronApp } from 'update-electron-app';
 // import Logger from 'electron-log';
 
@@ -42,7 +41,7 @@ if (!isDev) {
 }
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (electronSquirrelStartup) {
+if (require('electron-squirrel-startup')) {
     app.quit();
 }
 

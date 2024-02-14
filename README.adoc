@@ -28,6 +28,10 @@ yarn run dev
 ----
 * 运行程序调试
 +
+====
+须先设置 *tsconfig.ts* 的 *compilerOptions/module* 为 *CommonJS*
+====
++
 ----
 yarn run start
 ----
@@ -40,6 +44,10 @@ yarn run clean
 ----
 * 网页编译
 +
+====
+须先设置 *tsconfig.ts* 的 *compilerOptions/module* 为 *ESNext*
+====
++
 ----
 yarn run build
 ----
@@ -48,11 +56,11 @@ yarn run build
 ----
 yarn run make
 ----
++
 ====
 如何指定编译的平台？
 
-- 请注意 *package.json* 的脚本中的 *--platform win32* 的部分：win32的值可以换成 *darwin* *linux* 等值；如果没有设置，默认编译的平台就是当前操作系统的平台
-- 如果不是 *win32* 平台，可以把 *--platform xxxxx* 参数后面的所有字符串都删除
+请注意 *package.json* 的脚本中的 *--platform win32* 的部分：win32的值可以换成 *darwin* *linux* 等值；如果没有设置，默认编译的平台就是当前操作系统的平台
 ====
 
 === 发布

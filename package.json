@@ -4,7 +4,6 @@
     "version": "1.0.0",
     "description": "统一身份认证和访问管理平台的前端",
     "main": ".vite/build/main.js",
-    "type": "module",
     "scripts": {
         "clean": "rimraf dist & rimraf out",
         "dev": "vite -c vite.renderer.config.ts",
@@ -48,7 +47,6 @@
         "@electron-forge/publisher-github": "^7.2.0",
         "@iconify-json/ep": "^1.1.14",
         "@iconify-json/svg-spinners": "^1.1.2",
-        "@types/electron-squirrel-startup": "^1.0.2",
         "@types/mockjs": "^1.0.10",
         "@types/node": "^20.11.17",
         "@types/qs": "^6.9.11",
