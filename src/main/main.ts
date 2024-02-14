@@ -3,40 +3,42 @@ import path from 'path';
 // import { updateElectronApp } from 'update-electron-app';
 // import Logger from 'electron-log';
 
+const isDev = !app.isPackaged;
+console.log('isDev', isDev);
+
 // // github自动更新程序
 // updateElectronApp({
 //     updateInterval: '5 minutes',
 //     logger: Logger,
 // });
 
-// 第3方自动更新程序的服务器
-const platform = process.platform === 'win32' ? 'win64' : process.platform;
-const url = `${process.env.AUTO_UPDATE_SERVER}/update/${platform}/${app.getVersion()}`;
-console.log('更新服务器的地址', url);
-autoUpdater.setFeedURL({ url });
-setInterval(() => {
-    autoUpdater.checkForUpdates();
-}, 60000);
-autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
-    const dialogOpts: MessageBoxOptions = {
-        type: 'info',
-        buttons: ['Restart', 'Later'],
-        title: 'Application Update',
-        message: process.platform === 'win32' ? releaseNotes : releaseName,
-        detail: 'A new version has been downloaded. Restart the application to apply the updates.',
-    };
+if (!isDev) {
+    // 第3方自动更新程序的服务器
+    const platform = process.platform === 'win32' ? 'win64' : process.platform;
+    const url = `${process.env.AUTO_UPDATE_SERVER}/update/${platform}/${app.getVersion()}`;
+    console.log('更新服务器的地址', url);
+    autoUpdater.setFeedURL({ url });
+    setInterval(() => {
+        autoUpdater.checkForUpdates();
+    }, 60000);
+    autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
+        const dialogOpts: MessageBoxOptions = {
+            type: 'info',
+            buttons: ['Restart', 'Later'],
+            title: 'Application Update',
+            message: process.platform === 'win32' ? releaseNotes : releaseName,
+            detail: 'A new version has been downloaded. Restart the application to apply the updates.',
+        };
 
-    dialog.showMessageBox(dialogOpts).then((returnValue) => {
-        if (returnValue.response === 0) autoUpdater.quitAndInstall();
+        dialog.showMessageBox(dialogOpts).then((returnValue) => {
+            if (returnValue.response === 0) autoUpdater.quitAndInstall();
+        });
     });
-});
-autoUpdater.on('error', (message) => {
-    console.error('There was a problem updating the application');
-    console.error(message);
-});
-
-const isDev = !app.isPackaged;
-console.log('isDev', isDev);
+    autoUpdater.on('error', (message) => {
+        console.error('There was a problem updating the application');
+        console.error(message);
+    });
+}
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
