@@ -72,6 +72,7 @@ export default defineConfig(({ command, mode }) => {
         plugins: [
             vue(),
             // mock
+            // https://github.com/vbenjs/vite-plugin-mock
             viteMockServe(),
             // Reactivity Transform
             // https://vue-macros.sxzz.moe/zh-CN/features/reactivity-transform.html
