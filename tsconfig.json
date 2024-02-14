@@ -1,16 +1,39 @@
 {
-  "compilerOptions": {
-    "target": "ESNext",
-    "module": "commonjs",
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "noImplicitAny": true,
-    "sourceMap": true,
-    "baseUrl": ".",
-    "outDir": "dist",
-    "moduleResolution": "node",
-    "resolveJsonModule": true
-  },
-  "include": ["src"]
+    "compilerOptions": {
+        "target": "ESNext",
+        "allowJs": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "noImplicitAny": true,
+        "sourceMap": true,
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+
+        /* 新增或修改*/
+        "module": "ESNext",
+        "baseUrl": ".",
+        "outDir": "dist",
+        "paths": {
+            "~/*": ["./src/renderer/*"]
+        },
+        "types": [
+            // 支持NodeJS命名空间
+            "node",
+            // 支持Reactivity Transform
+            "@vue-macros/reactivity-transform/macros-global",
+            // 图标库插件支持vue类型声明
+            "unplugin-icons/types/vue"
+        ]
+    },
+    "include": [
+        "src",
+
+        /* 新增 */
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "src/**/*.vue",
+
+        "auto-imports.d.ts",
+        "components.d.ts"
+    ]
 }
