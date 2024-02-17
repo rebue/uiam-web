@@ -52,7 +52,7 @@ export default defineConfig(({ command, mode }) => {
         },
         build: {
             // 编译输出路径
-            outDir: resolve(__dirname, 'dist'),
+            outDir: resolve(__dirname, '.vite', 'renderer', 'main_window'),
             terserOptions: {
                 compress: {
                     drop_console: true, // 生产环境时移除console
