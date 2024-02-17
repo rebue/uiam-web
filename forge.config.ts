@@ -14,17 +14,20 @@ const config: ForgeConfig = {
     packagerConfig: {
         // 将源码打成asar包(依赖了@electron-forge/plugin-auto-unpack-natives插件)
         asar: true, // 目前Electron-Forge的7.2.0版本有bug，不能打包比较大的包(https://github.com/electron/forge/pull/3336)
+        // 忽略不必要的目录和文件(只留下 .vite/, node_modules/, package.json)
         ignore: [
             /^[/\\]\.key$/,
+            /^[/\\]disk$/,
+            /^[/\\]mock$/,
             /^[/\\]out$/,
+            /^[/\\]sqlite$/,
             /^[/\\]src$/,
-            /^[/\\]\.env\.development$/,
-            /^[/\\]\.env\.production$/,
             /^[/\\]\.eslintrc\.json$/,
             /^[/\\]\.gitignore$/,
             /^[/\\]\.npmrc$/,
             /^[/\\]\.prettierrc\.yml$/,
             /^[/\\]forge\.config\.ts$/,
+            /^[/\\]package-lock\.json$/,
             /^[/\\]README\.adoc$/,
             /^[/\\]tsconfig\.json$/,
             /^[/\\]vite\.main\.config\.ts$/,

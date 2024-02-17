@@ -10,8 +10,8 @@
         "resolveJsonModule": true,
 
         /* 新增或修改*/
-        "module": "ESNext",     // yarn run build 命令使用此选项
-        // "module": "CommonJS",   // yarn run start 命令使用此选项
+        // "module": "ESNext", // yarn run build 命令使用此选项
+        "module": "CommonJS",   // yarn run start 命令使用此选项
         "baseUrl": ".",
         "outDir": "dist",
         "paths": {
@@ -35,6 +35,7 @@
         "src/**/*.vue",
 
         "auto-imports.d.ts",
-        "components.d.ts"
+        "components.d.ts",
+        "src/renderer/env.ts"
     ]
 }
