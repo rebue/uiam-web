@@ -29,7 +29,7 @@ yarn run dev
 * 运行程序调试
 +
 ====
-须先设置 *tsconfig.ts* 的 *compilerOptions/module* 为 *CommonJS*
+须先设置 *tsconfig.json* 的 *compilerOptions/module* 为 *CommonJS*
 ====
 +
 ----
@@ -45,7 +45,7 @@ yarn run clean
 * 网页编译
 +
 ====
-须先设置 *tsconfig.ts* 的 *compilerOptions/module* 为 *ESNext*
+须先设置 *tsconfig.json* 的 *compilerOptions/module* 为 *ESNext*
 ====
 +
 ----
